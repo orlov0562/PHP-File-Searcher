@@ -203,7 +203,7 @@
         <ul>
             <li>Example mask for `strpos` search type: <div>public function __construct</div></li>
             <li>Example mask for `preg_match` search type: <div>~public\sfunction\s__construct\(\$var_[a-z]+\)~Usix</div></li>
-            <li>Latest version of script in: <a href="">GitHub</a></li>
+            <li>Latest version of script in: <a href="https://github.com/orlov0562/PHP-File-Searcher">GitHub</a></li>
         </ul>
     </div>
     <div class="clear"></div>
