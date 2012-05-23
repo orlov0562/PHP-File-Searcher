@@ -12,7 +12,10 @@
                     if (is_dir($dir.$file))
                     {
                         $next_dir = $dir.$file.'/';
-                        echo '<div class="result res_dir" style="padding-left:'.(20*$ri).'px">'.$next_dir.'</div>';
+                        echo '<div class="result res_dir" style="padding-left:'.(20*$ri).'px">
+                                <input type="checkbox" id="'.md5($next_dir).'" onclick="change_color(this);">
+                                <label for="'.md5($next_dir).'">'.$next_dir.'</label>
+                              </div>';
                         $r = do_search($next_dir, $file_mask, $search_mask, $search_type, $ri+1);
                         if ($r AND !$ret) $ret = $r;
                     }
@@ -33,7 +36,10 @@
                             }
                         }
 
-                        echo '<div class="result '.$class.'" style="padding-left:'.(10*$ri).'px">'.$filename.'</div>';
+                        echo '<div class="result '.$class.'" style="padding-left:'.(10*$ri).'px">
+                                <input type="checkbox" id="'.md5($filename).'" onclick="change_color(this);">
+                                <label for="'.md5($filename).'">'.$filename.'</label>
+                        </div>';
                     }
                 }
                 closedir($dh);
@@ -87,13 +93,14 @@
         body {font-family:Verdana;}
         #topheader { background-color: #0066CC; color:white; border-bottom:2px solid #0054A8; padding:20px;}
         .clear {clear:both;}
-        .field {clear:both; text-align:right; line-height:25px;}
-        label {float:left; padding-right:10px;}
+        .main .field {clear:both; text-align:right; line-height:25px;}
+        .main label {float:left; padding-right:10px;}
         .main {float:left}
-        input[type=text] { width:400px;}
-        select { width:406px;}
+        .main input[type=text] { width:400px;}
+        .main select { width:406px;}
         hr {height:1px; border:none; color:silver; background-color:silver;}
         #results {font-size:11px;}
+        .result {padding:4px 0px;}
         .res_dir {color:blue; font-weight:bold;}
         .res_file_not_found {color:silver;}
         .res_file_found {color:green; background-color:yellow; padding:4px;}
@@ -103,12 +110,26 @@
         #examples ul {margin-top:0px;}
         #examples ul li {margin-bottom:10px;}
         #examples div, #examples span, #examples a {color:yellow;}
+        .check-box-checked {background-color:#000000; color:#00FF33;}
 
     /*]]>*/
     </style>
     <script language="JavaScript" src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script language="JavaScript" type="text/javascript">
     /*<![CDATA[*/
+
+        function change_color(checkbox)
+        {
+            if ($(checkbox).is(':checked'))
+            {
+                $(checkbox).parent().addClass('check-box-checked');
+            }
+            else
+            {
+                $(checkbox).parent().removeClass('check-box-checked');
+            }
+        }
+
         function show(type)
         {
             if (type=='all') {
